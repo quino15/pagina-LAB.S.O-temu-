@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRASA MARKET — Ofertas de hamburguesas 🍔</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="announce">🔥 <b>ENVÍO GRASOSO GRATIS</b> arriba de $8.000 · pagás en 3 cuotas sin recargo · stock que vuela</div>
+
+<header class="main">
+  <div class="header-row">
+    <div class="logo">GRASA<span>MARKET</span></div>
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" placeholder="Buscar cheeseburger, doble carne, papas...">
+    </div>
+    <div class="header-actions">
+      <div class="icon-btn">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6c-1.9-1.9-5-1.9-6.9 0L12 5.5l-1.9-1.9c-1.9-1.9-5-1.9-6.9 0-1.9 1.9-1.9 5 0 6.9L12 19.3l8.8-8.8c1.9-1.9 1.9-5 0-6.9z"/></svg>
+      </div>
+      <button class="icon-btn" id="cartBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+        Carrito
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+  <div class="chipbar" id="chipbar"></div>
+</header>
+
+<div class="flash">
+  <div class="flash-inner">
+    <div>
+      <p class="flash-title display">SÁBADO DE GRASA −73%</p>
+      <p class="flash-sub">Las mejores promos de McDonald's, Burger King y Mostaza juntas por primera vez. Corré que quedan pocas.</p>
+    </div>
+    <div class="timer">
+      <div class="box"><b id="t-h">02</b><small>HORAS</small></div>
+      <div class="box"><b id="t-m">14</b><small>MIN</small></div>
+      <div class="box"><b id="t-s">59</b><small>SEG</small></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="section-head">
+    <h2 class="display">Elegí tu hamburguesa</h2>
+    <div class="sort">
+      <select id="sortSelect">
+        <option value="pop">Más vendidas</option>
+        <option value="cheap">Menor precio</option>
+        <option value="disc">Mayor descuento</option>
+      </select>
+    </div>
+  </div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<div class="wheel-fab" id="wheelFab"><span class="dot">🎡</span> Girá y ganá un cupón</div>
+
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3 class="display">Tu pedido</h3>
+    <div class="close-x" id="closeDrawer">✕</div>
+  </div>
+  <div class="drawer-body" id="drawerBody">
+    <p class="drawer-empty">Todavía no agregaste nada. ¡Tenés hambre y no lo sabés!</p>
+  </div>
+  <div class="drawer-foot">
+    <div class="total-row"><span>Total</span><span id="drawerTotal">$0</span></div>
+    <button class="checkout-btn">Finalizar compra grasosa</button>
+  </div>
+</div>
+
+<footer>GRASA MARKET es un catálogo de fantasía hecho para practicar diseño web · no está afiliado a ninguna cadena real de comidas rápidas</footer>
+
+<!-- popup de bienvenida -->
+<div class="modal-overlay" id="welcomeModal">
+  <div class="modal-box">
+    <div class="modal-close" id="closeWelcome">✕</div>
+    <span class="kicker">Antes de que te vayas</span>
+    <h3 class="display">−15% en tu primer pedido grasoso</h3>
+    <p class="sub">Sumate y desbloqueá el descuento para cualquier hamburguesa del catálogo, hoy nomás.</p>
+    <div class="coupon-box">
+      <b>GRASA15</b>
+      <button class="coupon-copy" id="copyCoupon">Copiar código</button>
+    </div>
+    <button class="modal-cta" id="claimWelcome">Quiero mi descuento</button>
+    <a class="modal-skip" id="skipWelcome">no gracias, prefiero pagar de más</a>
+  </div>
+</div>
+
+<!-- popup de la ruleta -->
+<div class="modal-overlay" id="wheelModal">
+  <div class="modal-box">
+    <div class="modal-close" id="closeWheel">✕</div>
+    <span class="kicker">Ruleta grasosa</span>
+    <h3 class="display" style="font-size:24px;">Girá una vez por visita</h3>
+    <div class="wheel-stage">
+      <div class="wheel-pin"></div>
+      <div class="wheel-disc" id="wheelDisc">
+        <span style="top:14px; left:80px;">10% OFF</span>
+        <span style="top:60px; right:-6px; width:60px;">ENVÍO</span>
+        <span style="bottom:60px; right:0; width:60px;">20% OFF</span>
+        <span style="bottom:14px; left:80px;">SEGUÍ</span>
+        <span style="bottom:60px; left:-6px; width:60px;">2X1</span>
+        <span style="top:60px; left:-2px; width:60px;">15% OFF</span>
+      </div>
+      <div class="wheel-center">🍔</div>
+    </div>
+    <p class="wheel-result" id="wheelResult"></p>
+    <button class="modal-cta wheel-btn" id="spinBtn">Girar la ruleta</button>
+  </div>
+</div>
+
+<!-- popup de no te vayas (exit intent) -->
+<div class="modal-overlay" id="exitModal">
+  <div class="modal-box">
+    <div class="modal-close" id="closeExit">✕</div>
+    <span class="kicker">Última oferta</span>
+    <h3 class="display">¡Esperá! Llevate un −20% extra</h3>
+    <p class="sub">Detectamos que te ibas sin hamburguesa. Esto no se repite todos los días.</p>
+    <div class="coupon-box">
+      <b>NOTEVAYAS20</b>
+      <button class="coupon-copy" id="copyExitCoupon">Copiar código</button>
+    </div>
+    <button class="modal-cta" id="claimExit">Aprovechar ahora</button>
+  </div>
+</div>
+
+<!-- popup de métodos de pago -->
+<div class="modal-overlay" id="payModal">
+  <div class="modal-box" id="payModalBox">
+    <div class="modal-close" id="closePay">✕</div>
+    <span class="kicker">Finalizar compra</span>
+    <h3 class="display" style="font-size:24px;">¿Cómo pagás?</h3>
+    <p class="sub">Elegí un método para tu pedido de <b id="payTotal">$0</b></p>
+    <div class="pay-list" id="payList">
+      <label class="pay-option">
+        <input type="radio" name="pay" value="mp" checked>
+        <span class="pay-icon">🅿️</span>
+        <span class="pay-text"><b>Mercado Pago</b><small>QR, saldo o tarjeta asociada</small></span>
+      </label>
+      <label class="pay-option">
+        <input type="radio" name="pay" value="credito">
+        <span class="pay-icon">💳</span>
+        <span class="pay-text"><b>Tarjeta de crédito</b><small>hasta 3 cuotas sin recargo</small></span>
+      </label>
+      <label class="pay-option">
+        <input type="radio" name="pay" value="debito">
+        <span class="pay-icon">💳</span>
+        <span class="pay-text"><b>Tarjeta de débito</b><small>débito inmediato</small></span>
+      </label>
+      <label class="pay-option">
+        <input type="radio" name="pay" value="efectivo">
+        <span class="pay-icon">💵</span>
+        <span class="pay-text"><b>Efectivo al recibir</b><small>pagás cuando llega el pedido</small></span>
+      </label>
+      <label class="pay-option">
+        <input type="radio" name="pay" value="rapipago">
+        <span class="pay-icon">🧾</span>
+        <span class="pay-text"><b>Rapipago / Pago Fácil</b><small>pagás con un código en cualquier local</small></span>
+      </label>
+    </div>
+    <button class="modal-cta" id="confirmPay">Confirmar pago</button>
+  </div>
+</div>
+
+<div class="toast-stack" id="toastStack"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
